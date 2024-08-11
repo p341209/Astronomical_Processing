@@ -33,13 +33,13 @@
             btn_Write_File = new Button();
             lbl_Search_dataList = new Label();
             lbl_Write_File = new Label();
-            btn_Search_dataFile = new Button();
             lbl_show_list = new Label();
             btn_show_data = new Button();
             btn_sort_data = new Button();
             lbl_sort_data = new Label();
             btn_fetch_data = new Button();
             lbl_fetch_data = new Label();
+            btn_binary_search = new Button();
             SuspendLayout();
             // 
             // lbl_Page_Heading
@@ -89,16 +89,6 @@
             lbl_Write_File.TabIndex = 4;
             lbl_Write_File.Text = "Write the data to a text file:";
             lbl_Write_File.Click += lbl_Write_File_Click;
-            // 
-            // btn_Search_dataFile
-            // 
-            btn_Search_dataFile.Location = new Point(401, 113);
-            btn_Search_dataFile.Name = "btn_Search_dataFile";
-            btn_Search_dataFile.Size = new Size(75, 23);
-            btn_Search_dataFile.TabIndex = 5;
-            btn_Search_dataFile.Text = "Search";
-            btn_Search_dataFile.UseVisualStyleBackColor = true;
-            btn_Search_dataFile.Click += btn_Search_dataFile_Click;
             // 
             // lbl_show_list
             // 
@@ -157,19 +147,29 @@
             lbl_fetch_data.TabIndex = 11;
             lbl_fetch_data.Text = "Fetch the data:";
             // 
+            // btn_binary_search
+            // 
+            btn_binary_search.Location = new Point(398, 112);
+            btn_binary_search.Name = "btn_binary_search";
+            btn_binary_search.Size = new Size(75, 23);
+            btn_binary_search.TabIndex = 12;
+            btn_binary_search.Text = "Search";
+            btn_binary_search.UseVisualStyleBackColor = true;
+            btn_binary_search.Click += btn_binary_search_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(620, 359);
+            Controls.Add(btn_binary_search);
             Controls.Add(lbl_fetch_data);
             Controls.Add(btn_fetch_data);
             Controls.Add(lbl_sort_data);
             Controls.Add(btn_sort_data);
             Controls.Add(btn_show_data);
             Controls.Add(lbl_show_list);
-            Controls.Add(btn_Search_dataFile);
             Controls.Add(lbl_Write_File);
             Controls.Add(lbl_Search_dataList);
             Controls.Add(btn_Write_File);
@@ -189,12 +189,12 @@
         private Button btn_Write_File;
         private Label lbl_Search_dataList;
         private Label lbl_Write_File;
-        private Button btn_Search_dataFile;
         private Label lbl_show_list;
         private Button btn_show_data;
         private Button btn_sort_data;
         private Label lbl_sort_data;
         private Button btn_fetch_data;
         private Label lbl_fetch_data;
+        private Button btn_binary_search;
     }
 }
