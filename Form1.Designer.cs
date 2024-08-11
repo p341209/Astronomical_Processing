@@ -36,6 +36,8 @@
             btn_Search_dataFile = new Button();
             lbl_show_list = new Label();
             btn_show_data = new Button();
+            btn_sort_data = new Button();
+            lbl_sort_data = new Label();
             SuspendLayout();
             // 
             // lbl_Page_Heading
@@ -115,12 +117,33 @@
             btn_show_data.UseVisualStyleBackColor = true;
             btn_show_data.Click += btn_show_data_Click;
             // 
+            // btn_sort_data
+            // 
+            btn_sort_data.Location = new Point(272, 232);
+            btn_sort_data.Name = "btn_sort_data";
+            btn_sort_data.Size = new Size(100, 23);
+            btn_sort_data.TabIndex = 8;
+            btn_sort_data.Text = "Sort Data";
+            btn_sort_data.UseVisualStyleBackColor = true;
+            btn_sort_data.Click += btn_sort_data_Click;
+            // 
+            // lbl_sort_data
+            // 
+            lbl_sort_data.AutoSize = true;
+            lbl_sort_data.Location = new Point(186, 236);
+            lbl_sort_data.Name = "lbl_sort_data";
+            lbl_sort_data.Size = new Size(77, 15);
+            lbl_sort_data.TabIndex = 9;
+            lbl_sort_data.Text = "Sort the data:";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(620, 359);
+            Controls.Add(lbl_sort_data);
+            Controls.Add(btn_sort_data);
             Controls.Add(btn_show_data);
             Controls.Add(lbl_show_list);
             Controls.Add(btn_Search_dataFile);
@@ -146,5 +169,7 @@
         private Button btn_Search_dataFile;
         private Label lbl_show_list;
         private Button btn_show_data;
+        private Button btn_sort_data;
+        private Label lbl_sort_data;
     }
 }
