@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Text;
 
@@ -7,9 +9,8 @@ namespace Astronomical_Processing
     public partial class Form1 : Form
 
     {
-        // Create an integer list with 24 elements, available to all functions
-        List<int> lst_astro_data = new List<int>() { 10, 30, 20, 40, 21, 11, 31, 41, 12, 32, 22, 42, 13, 23, 33, 43, 14, 24, 34, 44, 15, 25, 35, 45, };
-     
+        // declare the list for use in functions
+        List<int> lst_astro_data = new List<int>();
         public Form1()
         {
             InitializeComponent();
@@ -116,7 +117,36 @@ namespace Astronomical_Processing
                 // If no two elements were swapped in the inner loop, then the list is sorted
                 if (!swapped)
                     break;
-             }
+            }
+        }
+
+        private void btn_fetch_data_Click(object sender, EventArgs e)
+        {
+            // Create an integer list with 24 elements,
+            // from a data file located on this computer
+            try
+            {
+                // where to find the data file
+                string file_path = @"c:\temp\integers.txt";
+                // open the data file for reading
+                StreamReader reader = new StreamReader(file_path);
+                string line;
+                // add each line in the file to a list
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (int.TryParse(line, out int astro_value))
+                        { lst_astro_data.Add(astro_value); }
+                    else { MessageBox.Show("Warning! The data file contains a non-integer value. Only integers will be imported."); }
+                }
+                
+                // close the file
+                reader.Close();
+            }
+            // display error message
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
         }
     }
 }

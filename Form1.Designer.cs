@@ -38,6 +38,8 @@
             btn_show_data = new Button();
             btn_sort_data = new Button();
             lbl_sort_data = new Label();
+            btn_fetch_data = new Button();
+            lbl_fetch_data = new Label();
             SuspendLayout();
             // 
             // lbl_Page_Heading
@@ -52,7 +54,7 @@
             // 
             // txt_Search_dataList
             // 
-            txt_Search_dataList.Location = new Point(272, 78);
+            txt_Search_dataList.Location = new Point(271, 113);
             txt_Search_dataList.Name = "txt_Search_dataList";
             txt_Search_dataList.Size = new Size(100, 23);
             txt_Search_dataList.TabIndex = 1;
@@ -60,7 +62,7 @@
             // 
             // btn_Write_File
             // 
-            btn_Write_File.Location = new Point(272, 130);
+            btn_Write_File.Location = new Point(271, 165);
             btn_Write_File.Name = "btn_Write_File";
             btn_Write_File.Size = new Size(100, 23);
             btn_Write_File.TabIndex = 2;
@@ -71,7 +73,7 @@
             // lbl_Search_dataList
             // 
             lbl_Search_dataList.AutoSize = true;
-            lbl_Search_dataList.Location = new Point(104, 81);
+            lbl_Search_dataList.Location = new Point(103, 116);
             lbl_Search_dataList.Name = "lbl_Search_dataList";
             lbl_Search_dataList.Size = new Size(162, 15);
             lbl_Search_dataList.TabIndex = 3;
@@ -81,7 +83,7 @@
             // lbl_Write_File
             // 
             lbl_Write_File.AutoSize = true;
-            lbl_Write_File.Location = new Point(117, 138);
+            lbl_Write_File.Location = new Point(116, 173);
             lbl_Write_File.Name = "lbl_Write_File";
             lbl_Write_File.Size = new Size(149, 15);
             lbl_Write_File.TabIndex = 4;
@@ -90,7 +92,7 @@
             // 
             // btn_Search_dataFile
             // 
-            btn_Search_dataFile.Location = new Point(402, 78);
+            btn_Search_dataFile.Location = new Point(401, 113);
             btn_Search_dataFile.Name = "btn_Search_dataFile";
             btn_Search_dataFile.Size = new Size(75, 23);
             btn_Search_dataFile.TabIndex = 5;
@@ -101,7 +103,7 @@
             // lbl_show_list
             // 
             lbl_show_list.AutoSize = true;
-            lbl_show_list.Location = new Point(186, 188);
+            lbl_show_list.Location = new Point(185, 223);
             lbl_show_list.Name = "lbl_show_list";
             lbl_show_list.Size = new Size(80, 15);
             lbl_show_list.TabIndex = 6;
@@ -109,7 +111,7 @@
             // 
             // btn_show_data
             // 
-            btn_show_data.Location = new Point(272, 180);
+            btn_show_data.Location = new Point(271, 215);
             btn_show_data.Name = "btn_show_data";
             btn_show_data.Size = new Size(100, 23);
             btn_show_data.TabIndex = 7;
@@ -119,7 +121,7 @@
             // 
             // btn_sort_data
             // 
-            btn_sort_data.Location = new Point(272, 232);
+            btn_sort_data.Location = new Point(271, 267);
             btn_sort_data.Name = "btn_sort_data";
             btn_sort_data.Size = new Size(100, 23);
             btn_sort_data.TabIndex = 8;
@@ -130,11 +132,30 @@
             // lbl_sort_data
             // 
             lbl_sort_data.AutoSize = true;
-            lbl_sort_data.Location = new Point(186, 236);
+            lbl_sort_data.Location = new Point(185, 271);
             lbl_sort_data.Name = "lbl_sort_data";
             lbl_sort_data.Size = new Size(77, 15);
             lbl_sort_data.TabIndex = 9;
             lbl_sort_data.Text = "Sort the data:";
+            // 
+            // btn_fetch_data
+            // 
+            btn_fetch_data.Location = new Point(271, 63);
+            btn_fetch_data.Name = "btn_fetch_data";
+            btn_fetch_data.Size = new Size(100, 23);
+            btn_fetch_data.TabIndex = 10;
+            btn_fetch_data.Text = "Fetch Data";
+            btn_fetch_data.UseVisualStyleBackColor = true;
+            btn_fetch_data.Click += btn_fetch_data_Click;
+            // 
+            // lbl_fetch_data
+            // 
+            lbl_fetch_data.AutoSize = true;
+            lbl_fetch_data.Location = new Point(177, 67);
+            lbl_fetch_data.Name = "lbl_fetch_data";
+            lbl_fetch_data.Size = new Size(85, 15);
+            lbl_fetch_data.TabIndex = 11;
+            lbl_fetch_data.Text = "Fetch the data:";
             // 
             // Form1
             // 
@@ -142,6 +163,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(620, 359);
+            Controls.Add(lbl_fetch_data);
+            Controls.Add(btn_fetch_data);
             Controls.Add(lbl_sort_data);
             Controls.Add(btn_sort_data);
             Controls.Add(btn_show_data);
@@ -171,5 +194,7 @@
         private Button btn_show_data;
         private Button btn_sort_data;
         private Label lbl_sort_data;
+        private Button btn_fetch_data;
+        private Label lbl_fetch_data;
     }
 }
