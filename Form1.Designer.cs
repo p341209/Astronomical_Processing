@@ -40,12 +40,13 @@
             btn_fetch_data = new Button();
             lbl_fetch_data = new Label();
             btn_binary_search = new Button();
+            listBox1 = new ListBox();
             SuspendLayout();
             // 
             // lbl_Page_Heading
             // 
             lbl_Page_Heading.AutoSize = true;
-            lbl_Page_Heading.Location = new Point(252, 27);
+            lbl_Page_Heading.Location = new Point(97, 21);
             lbl_Page_Heading.Name = "lbl_Page_Heading";
             lbl_Page_Heading.Size = new Size(138, 15);
             lbl_Page_Heading.TabIndex = 0;
@@ -54,15 +55,15 @@
             // 
             // txt_Search_dataList
             // 
-            txt_Search_dataList.Location = new Point(271, 113);
+            txt_Search_dataList.Location = new Point(92, 189);
             txt_Search_dataList.Name = "txt_Search_dataList";
-            txt_Search_dataList.Size = new Size(100, 23);
+            txt_Search_dataList.Size = new Size(34, 23);
             txt_Search_dataList.TabIndex = 1;
             txt_Search_dataList.TextChanged += txt_Search_dataList_TextChanged;
             // 
             // btn_Write_File
             // 
-            btn_Write_File.Location = new Point(271, 165);
+            btn_Write_File.Location = new Point(212, 327);
             btn_Write_File.Name = "btn_Write_File";
             btn_Write_File.Size = new Size(100, 23);
             btn_Write_File.TabIndex = 2;
@@ -73,17 +74,17 @@
             // lbl_Search_dataList
             // 
             lbl_Search_dataList.AutoSize = true;
-            lbl_Search_dataList.Location = new Point(103, 116);
+            lbl_Search_dataList.Location = new Point(23, 192);
             lbl_Search_dataList.Name = "lbl_Search_dataList";
-            lbl_Search_dataList.Size = new Size(162, 15);
+            lbl_Search_dataList.Size = new Size(63, 15);
             lbl_Search_dataList.TabIndex = 3;
-            lbl_Search_dataList.Text = "Enter an integer to search for:";
+            lbl_Search_dataList.Text = "Search for:";
             lbl_Search_dataList.Click += lbl_Search_dataList_Click;
             // 
             // lbl_Write_File
             // 
             lbl_Write_File.AutoSize = true;
-            lbl_Write_File.Location = new Point(116, 173);
+            lbl_Write_File.Location = new Point(57, 335);
             lbl_Write_File.Name = "lbl_Write_File";
             lbl_Write_File.Size = new Size(149, 15);
             lbl_Write_File.TabIndex = 4;
@@ -93,7 +94,7 @@
             // lbl_show_list
             // 
             lbl_show_list.AutoSize = true;
-            lbl_show_list.Location = new Point(185, 223);
+            lbl_show_list.Location = new Point(46, 113);
             lbl_show_list.Name = "lbl_show_list";
             lbl_show_list.Size = new Size(80, 15);
             lbl_show_list.TabIndex = 6;
@@ -101,7 +102,7 @@
             // 
             // btn_show_data
             // 
-            btn_show_data.Location = new Point(271, 215);
+            btn_show_data.Location = new Point(135, 105);
             btn_show_data.Name = "btn_show_data";
             btn_show_data.Size = new Size(100, 23);
             btn_show_data.TabIndex = 7;
@@ -111,7 +112,7 @@
             // 
             // btn_sort_data
             // 
-            btn_sort_data.Location = new Point(271, 267);
+            btn_sort_data.Location = new Point(135, 149);
             btn_sort_data.Name = "btn_sort_data";
             btn_sort_data.Size = new Size(100, 23);
             btn_sort_data.TabIndex = 8;
@@ -122,7 +123,7 @@
             // lbl_sort_data
             // 
             lbl_sort_data.AutoSize = true;
-            lbl_sort_data.Location = new Point(185, 271);
+            lbl_sort_data.Location = new Point(49, 153);
             lbl_sort_data.Name = "lbl_sort_data";
             lbl_sort_data.Size = new Size(77, 15);
             lbl_sort_data.TabIndex = 9;
@@ -130,7 +131,7 @@
             // 
             // btn_fetch_data
             // 
-            btn_fetch_data.Location = new Point(271, 63);
+            btn_fetch_data.Location = new Point(135, 63);
             btn_fetch_data.Name = "btn_fetch_data";
             btn_fetch_data.Size = new Size(100, 23);
             btn_fetch_data.TabIndex = 10;
@@ -141,7 +142,7 @@
             // lbl_fetch_data
             // 
             lbl_fetch_data.AutoSize = true;
-            lbl_fetch_data.Location = new Point(177, 67);
+            lbl_fetch_data.Location = new Point(44, 63);
             lbl_fetch_data.Name = "lbl_fetch_data";
             lbl_fetch_data.Size = new Size(85, 15);
             lbl_fetch_data.TabIndex = 11;
@@ -149,20 +150,31 @@
             // 
             // btn_binary_search
             // 
-            btn_binary_search.Location = new Point(398, 112);
+            btn_binary_search.Location = new Point(135, 192);
             btn_binary_search.Name = "btn_binary_search";
-            btn_binary_search.Size = new Size(75, 23);
+            btn_binary_search.Size = new Size(100, 23);
             btn_binary_search.TabIndex = 12;
             btn_binary_search.Text = "Search";
             btn_binary_search.UseVisualStyleBackColor = true;
             btn_binary_search.Click += btn_binary_search_Click;
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 15;
+            listBox1.Location = new Point(241, 63);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(71, 229);
+            listBox1.TabIndex = 13;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(620, 359);
+            ClientSize = new Size(360, 385);
+            Controls.Add(listBox1);
             Controls.Add(btn_binary_search);
             Controls.Add(lbl_fetch_data);
             Controls.Add(btn_fetch_data);
@@ -196,5 +208,6 @@
         private Button btn_fetch_data;
         private Label lbl_fetch_data;
         private Button btn_binary_search;
+        private ListBox listBox1;
     }
 }

@@ -6,7 +6,10 @@ namespace Astronomical_Processing
         // declare the list for use in functions
         List<int> lst_astro_data = new List<int>();
         // declare the path for where the data files are
-        string data_path = @"c:\temp\";
+        string data_path = @".\";
+        string data_file_name = "integers.txt";
+        // set a boolean to determine whether data has been loaded into list
+        bool data_fetched = false;
         public Form1()
         {
             InitializeComponent();
@@ -44,30 +47,42 @@ namespace Astronomical_Processing
 
         private void btn_show_data_Click(object sender, EventArgs e)
         {
-            // create a string of all the unsorted list elements separated by a comma and space
-            var unsorted_list = string.Join(", ", lst_astro_data);
-            // display the string in a messagebox
-            MessageBox.Show(unsorted_list);
+            // if the data has been loaded into lst_astro_data 
+            if (data_fetched)
+            {
+                // clear contents of the listbox to prevent duplication
+                listBox1.Items.Clear();
+                // add all elemnts of lst_astro_data to the listbox
+                for (int y = 0; y < lst_astro_data.Count; y++)
+                {
+                    listBox1.Items.Add(lst_astro_data[y]);
+                }
+            }
+            else
+                MessageBox.Show("Nothing to display. Have you fetched the data?");
         }
 
         private void btn_sort_data_Click(object sender, EventArgs e)
         {
             // create a copy of the original data list to sort
-            List<int> lst_temp1 = new List<int>();
-            lst_temp1.AddRange(lst_astro_data);
+            List<int> lst_sorted = new List<int>();
+            lst_sorted.AddRange(lst_astro_data);
             //call the BubbleSort function and parse the copied list to it
-            BubbleSort(lst_temp1);
-            // create a string of all the sorted list elements separated by a comma and space
-            var sorted_list = string.Join(", ", lst_temp1);
-            // display the string in a messagebox
-            MessageBox.Show(sorted_list);
-            // write the sorted contents of the dataList to a new file
-            using var data_stream = new StreamWriter(data_path + "SortedDataFile.txt");
-            foreach (var data_point in lst_temp1)
+            BubbleSort(lst_sorted);
+            // clear contents of the listbox to prevent duplication
+            listBox1.Items.Clear();
+            // add all elements of lst_sorted to the listbox
+            for (int y = 0; y < lst_sorted.Count; y++)
             {
-                data_stream.WriteLine(data_point);
+                listBox1.Items.Add(lst_sorted[y]);
             }
-            MessageBox.Show("Data was written to file called " + data_path + "SortedDataFile.txt");
+            // write the sorted contents of the dataList to a new file
+            //using var data_stream = new StreamWriter(data_path + "SortedDataFile.txt");
+            //foreach (var data_point in lst_sorted)
+            //{
+            //    data_stream.WriteLine(data_point);
+            //}
+            //MessageBox.Show("Data was written to file called " + data_path + "SortedDataFile.txt");
         }
 
 
@@ -109,7 +124,7 @@ namespace Astronomical_Processing
                 // clear the list to prevent duplication
                 lst_astro_data.Clear();
                 // where to find the data file
-                string file_path = data_path + "integers.txt";
+                string file_path = data_path + data_file_name;
                 // open the data file for reading
                 StreamReader reader = new StreamReader(file_path);
                 string line;
@@ -122,6 +137,7 @@ namespace Astronomical_Processing
                 }
                 // close the file
                 reader.Close();
+                data_fetched = true;
             }
             // display error message
             catch (Exception ex)
@@ -160,13 +176,20 @@ namespace Astronomical_Processing
             int search_int;
             // test whether search input is an integer
             if (int.TryParse(txt_Search_dataList.Text, out search_int))
-            {   // it's an integer, do the search
+            {
+                // it's an integer, do the search
                 // use the BinarySearch function
-                int element_index = BinarySearch(lst_astro_data, search_int);
+                // Binary Search assumes sorted data; sort first
+                // create a copy of the original data list to sort
+                List<int> lst_sorted = new List<int>();
+                lst_sorted.AddRange(lst_astro_data);
+                //call the BubbleSort function and parse the copied list to it
+                BubbleSort(lst_sorted);
+                int element_index = BinarySearch(lst_sorted, search_int);
                 // if the element is found, BinarySearch returns the index number
                 if (element_index != -1)
                 {
-                    MessageBox.Show("Found \'" + search_int + "\' at index number " + element_index + " of dataList.");
+                    MessageBox.Show("Found \'" + search_int + "\' at index number " + element_index + " of sorted data list.");
                 }
                 else // the user input an integer, but it's not found in the dataList
                 {
@@ -175,8 +198,13 @@ namespace Astronomical_Processing
             }
             else // the user did not input an integer
             {
-                MessageBox.Show("\'" + txt_Search_dataList.Text + "\' not found, data contains only integers.");
+                MessageBox.Show("\'" + txt_Search_dataList.Text + "\' not found, can only search for integers.");
             }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
