@@ -45,46 +45,18 @@ namespace Astronomical_Processing
         {
         }
 
-        private void btn_show_data_Click(object sender, EventArgs e)
-        {
-            // if the data has been loaded into lst_astro_data 
-            if (data_fetched)
-            {
-                // clear contents of the listbox to prevent duplication
-                listBox1.Items.Clear();
-                // add all elemnts of lst_astro_data to the listbox
-                for (int y = 0; y < lst_astro_data.Count; y++)
-                {
-                    listBox1.Items.Add(lst_astro_data[y]);
-                }
-            }
-            else
-                MessageBox.Show("Nothing to display. Have you fetched the data?");
-        }
 
         private void btn_sort_data_Click(object sender, EventArgs e)
         {
-            // create a copy of the original data list to sort
-            List<int> lst_sorted = new List<int>();
-            lst_sorted.AddRange(lst_astro_data);
-            //call the BubbleSort function and parse the copied list to it
-            BubbleSort(lst_sorted);
+            BubbleSort(lst_astro_data);
             // clear contents of the listbox to prevent duplication
             listBox1.Items.Clear();
             // add all elements of lst_sorted to the listbox
-            for (int y = 0; y < lst_sorted.Count; y++)
+            for (int y = 0; y < lst_astro_data.Count; y++)
             {
-                listBox1.Items.Add(lst_sorted[y]);
+                listBox1.Items.Add(lst_astro_data[y]);
             }
-            // write the sorted contents of the dataList to a new file
-            //using var data_stream = new StreamWriter(data_path + "SortedDataFile.txt");
-            //foreach (var data_point in lst_sorted)
-            //{
-            //    data_stream.WriteLine(data_point);
-            //}
-            //MessageBox.Show("Data was written to file called " + data_path + "SortedDataFile.txt");
         }
-
 
         // Bubble sort method
         private void BubbleSort(List<int> lst_to_sort)
@@ -144,6 +116,13 @@ namespace Astronomical_Processing
             {
                 MessageBox.Show("Error.");
             }
+            // clear contents of the listbox to prevent duplication
+            listBox1.Items.Clear();
+            // add all elemnts of lst_astro_data to the listbox
+            for (int y = 0; y < lst_astro_data.Count; y++)
+            {
+                listBox1.Items.Add(lst_astro_data[y]);
+            }
         }
         //
         public static int BinarySearch(List<int> lst_to_search, int target)
@@ -173,36 +152,74 @@ namespace Astronomical_Processing
         }
         private void btn_binary_search_Click(object sender, EventArgs e)
         {
-            int search_int;
-            // test whether search input is an integer
-            if (int.TryParse(txt_Search_dataList.Text, out search_int))
+            // check that data has been loaded
+            if (lst_astro_data.Count == 0)
+            { MessageBox.Show("No data to search. Please fetch the data first."); }
+            else
             {
-                // it's an integer, do the search
-                // use the BinarySearch function
-                // Binary Search assumes sorted data; sort first
-                // create a copy of the original data list to sort
-                List<int> lst_sorted = new List<int>();
-                lst_sorted.AddRange(lst_astro_data);
-                //call the BubbleSort function and parse the copied list to it
-                BubbleSort(lst_sorted);
-                int element_index = BinarySearch(lst_sorted, search_int);
-                // if the element is found, BinarySearch returns the index number
-                if (element_index != -1)
+                int search_int;
+                // test whether search input is an integer
+                if (int.TryParse(txt_Search_dataList.Text, out search_int))
                 {
-                    MessageBox.Show("Found \'" + search_int + "\' at index number " + element_index + " of sorted data list.");
+                    // it's an integer, do the search
+                    // use the BinarySearch function
+                    // Binary Search assumes sorted data; sort first
+                    // create a copy of the original data list to sort
+                    List<int> lst_sorted = new List<int>();
+                    lst_sorted.AddRange(lst_astro_data);
+                    //call the BubbleSort function and parse the copied list to it
+                    BubbleSort(lst_sorted);
+                    int element_index = BinarySearch(lst_sorted, search_int);
+                    // if the element is found, BinarySearch returns the index number
+                    if (element_index != -1)
+                    {
+                        MessageBox.Show("Found \'" + search_int + "\' at index number " + element_index + " of sorted data list.");
+                    }
+                    else // the user input an integer, but it's not found in the dataList
+                    {
+                        MessageBox.Show("\'" + search_int + "\' was not found in data.");
+                    }
                 }
-                else // the user input an integer, but it's not found in the dataList
+                else // the user did not input an integer
                 {
-                    MessageBox.Show("\'" + search_int + "\' was not found in data.");
+                    MessageBox.Show("\'" + txt_Search_dataList.Text + "\' not found, can only search for integers.");
                 }
-            }
-            else // the user did not input an integer
-            {
-                MessageBox.Show("\'" + txt_Search_dataList.Text + "\' not found, can only search for integers.");
             }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // when an element in the list is selected
+            // get the index of the selected element
+            int selectedIndex = listBox1.SelectedIndex;
+            // cast the selected element as an integer variable
+            int selectedElement = (int)listBox1.SelectedItems[0];
+            // make the edit text box visible
+            textBoxEdit.Visible = true;
+            btn_Save.Visible = true;
+            lbl_edit_value.Visible = true;
+            //display the selected element in the edit text box
+            textBoxEdit.Text = (selectedElement.ToString());
+        }
+
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = listBox1.SelectedIndex;
+            int.TryParse(textBoxEdit.Text, out int newValue);
+            // update the lst_astro_data with the edited element
+            lst_astro_data[selectedIndex] = newValue;
+            //
+            // reload the listbox with updated values
+            // clear contents of the listbox to prevent duplication
+            listBox1.Items.Clear();
+            // add all elemnts of lst_astro_data to the listbox
+            for (int y = 0; y < lst_astro_data.Count; y++)
+            {
+                listBox1.Items.Add(lst_astro_data[y]);
+            }
+        }
+
+        private void lbl_edit_value_Click(object sender, EventArgs e)
         {
 
         }
