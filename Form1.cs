@@ -182,7 +182,10 @@ namespace Astronomical_Processing
         {
             // check that data has been loaded
             if (lst_astro_data.Count == 0)
-            { MessageBox.Show("No data to search. Please fetch the data first."); }
+            { 
+                MessageBox.Show("No data to search. Please fetch the data first.");
+                txt_Search_dataList.Clear();
+            }
             else
             {
                 int search_int;
@@ -245,6 +248,8 @@ namespace Astronomical_Processing
             {
                 listBox1.Items.Add(lst_astro_data[y]);
             }
+            // clear the old value out of the textBoxEdit
+            textBoxEdit.Clear();
         }
 
         private void lbl_edit_value_Click(object sender, EventArgs e)
