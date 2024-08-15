@@ -254,6 +254,9 @@ namespace Astronomical_Processing
                 }
                 // clear the old value out of the textBoxEdit
                 textBoxEdit.Clear();
+                textBoxEdit.Visible = false;
+                btn_Save.Visible = false;
+                lbl_edit_value.Visible = false;
             }
             else
             {
