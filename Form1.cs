@@ -86,6 +86,11 @@ namespace Astronomical_Processing
         {
             // count the number of elements in the list
             int n = lst_to_sort.Count;
+            // display an error message if no data to sort
+            if (n<1)
+            { 
+                MessageBox.Show("Nothing to sort. Please fetch data.");
+            }
             // use a boolean for swapping order of elements
             bool swapped;
             // for each element in the list
