@@ -216,6 +216,8 @@ namespace Astronomical_Processing
                     MessageBox.Show("\'" + txt_Search_dataList.Text + "\' not found, can only search for integers.");
                 }
             }
+            // clear the search box contents after performing the search
+            txt_Search_dataList.Clear ();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
