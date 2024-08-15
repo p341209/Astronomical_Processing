@@ -237,20 +237,29 @@ namespace Astronomical_Processing
         {
             int selectedIndex = listBox1.SelectedIndex;
             int.TryParse(textBoxEdit.Text, out int newValue);
-            // update the lst_astro_data with the edited element
-            lst_astro_data[selectedIndex] = newValue;
-            //
-            // reload the listbox with updated values
-            // clear contents of the listbox to prevent duplication
-            listBox1.Items.Clear();
-            // add all elemnts of lst_astro_data to the listbox
-            for (int y = 0; y < lst_astro_data.Count; y++)
+            // check that an element from the list has been selected
+            // to prevent out-of-range error
+            if (selectedIndex > -1)
             {
-                listBox1.Items.Add(lst_astro_data[y]);
+                // update the lst_astro_data with the edited element
+                lst_astro_data[selectedIndex] = newValue;
+                //
+                // reload the listbox with updated values
+                // clear contents of the listbox to prevent duplication
+                listBox1.Items.Clear();
+                // add all elemnts of lst_astro_data to the listbox
+                for (int y = 0; y < lst_astro_data.Count; y++)
+                {
+                    listBox1.Items.Add(lst_astro_data[y]);
+                }
+                // clear the old value out of the textBoxEdit
+                textBoxEdit.Clear();
             }
-            // clear the old value out of the textBoxEdit
-            textBoxEdit.Clear();
-        }
+            else
+            {
+                MessageBox.Show("Select an integer to edit.");
+            }
+         }
 
         private void lbl_edit_value_Click(object sender, EventArgs e)
         {
