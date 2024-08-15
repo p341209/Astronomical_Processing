@@ -203,6 +203,7 @@
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Astronomical Processing";
+            Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
         }

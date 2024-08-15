@@ -14,7 +14,30 @@ namespace Astronomical_Processing
         {
             InitializeComponent();
         }
-
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // run function to write 24 random integers to a file
+            create_random_data();
+        }
+        private void create_random_data()
+        {
+            Random rnd = new Random();
+            List<int> lst_random_numbers = new List<int>();
+            // generate 24 random integers
+            for (int i = 0; i < 24; i++)
+            {
+                // the integers to be between 0 and 90
+                int new_data_point = rnd.Next(0, 91);
+                // write them to a list
+                lst_random_numbers.Add(new_data_point);
+            }
+            // write the contents of the lst_random_numbers to a file, we will use the file as a datastream
+            using var data_stream = new StreamWriter(data_path + "integers.txt");
+            foreach (var data_point in lst_random_numbers)
+            {
+                data_stream.WriteLine(data_point);
+            }
+        }
         private void lbl_Page_Heading_Click(object sender, EventArgs e)
         {
 
