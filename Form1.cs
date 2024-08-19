@@ -1,4 +1,17 @@
 namespace Astronomical_Processing
+// Steven Kendall, p341209, Sprint Number 1
+// Date: August 2024
+// Version: 16
+// Name of the program: Astronomical_Processing
+// Brief explanation of the program:
+// Simulates astronomical data by generating random integers
+// the numbers are written to a file called integers.txt
+// the file integers.txt is then opened to be the simulated data stream
+// the read data is written to a list so that it can be sorted and searched
+// the data in the list can be edited and saved
+// the data can also be saved to a new file called data_file.txt
+//
+
 {
     public partial class Form1 : Form
 
