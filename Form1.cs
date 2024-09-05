@@ -1,3 +1,5 @@
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 namespace Astronomical_Processing
 // Steven Kendall, p341209, Sprint Number 1
 // Date: August 2024
@@ -100,8 +102,8 @@ namespace Astronomical_Processing
             // count the number of elements in the list
             int n = lst_to_sort.Count;
             // display an error message if no data to sort
-            if (n<1)
-            { 
+            if (n < 1)
+            {
                 MessageBox.Show("Nothing to sort. Please fetch data.");
             }
             // use a boolean for swapping order of elements
@@ -195,7 +197,7 @@ namespace Astronomical_Processing
         {
             // check that data has been loaded
             if (lst_astro_data.Count == 0)
-            { 
+            {
                 MessageBox.Show("No data to search. Please fetch the data first.");
                 txt_Search_dataList.Clear();
             }
@@ -230,7 +232,7 @@ namespace Astronomical_Processing
                 }
             }
             // clear the search box contents after performing the search
-            txt_Search_dataList.Clear ();
+            txt_Search_dataList.Clear();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -277,11 +279,77 @@ namespace Astronomical_Processing
             {
                 MessageBox.Show("Select an integer to edit.");
             }
-         }
+        }
 
         private void lbl_edit_value_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Mid_Extreme_Click(object sender, EventArgs e)
+        {
+            // check that data has been loaded
+            if (lst_astro_data.Count == 0)
+            {
+                MessageBox.Show("No data to calculate. Please fetch the data first.");
+                txt_Search_dataList.Clear();
+            }
+            else
+            {
+                // get the min value in the list
+                decimal minNumber = lst_astro_data.Min();
+                // get the max value  in the list
+                decimal maxNumber = lst_astro_data.Max();
+                // calculate the mid-extreme
+                decimal midExtreme = (minNumber + maxNumber) / 2;
+                // display the result with two decimal places
+                txt_MidExtreme.Text = midExtreme.ToString("F2");
+            }
+        }
+
+        private void btn_Range_Click(object sender, EventArgs e)
+        {
+            // check that data has been loaded
+            if (lst_astro_data.Count == 0)
+            {
+                MessageBox.Show("No data to calculate. Please fetch the data first.");
+                txt_Search_dataList.Clear();
+            }
+            else
+            {
+                // get the min value in the list
+                decimal minNumber = lst_astro_data.Min();
+                // get the max value  in the list
+                decimal maxNumber = lst_astro_data.Max();
+                // calculate the range
+                decimal list_range = maxNumber - minNumber;
+                // display the result with two decimal places
+                txt_Range.Text = list_range.ToString("F2");
+            }
+        }
+
+        private void btn_Mode_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Average_Click(object sender, EventArgs e)
+        {
+            // check that data has been loaded
+            if (lst_astro_data.Count == 0)
+            {
+                MessageBox.Show("No data to calculate. Please fetch the data first.");
+                txt_Search_dataList.Clear();
+            }
+            else
+            {
+                txt_Average.Text = lst_astro_data.Average().ToString("F2");
+            }
         }
     }
 }
