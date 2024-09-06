@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Numerics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Astronomical_Processing
@@ -72,6 +74,12 @@ namespace Astronomical_Processing
                 data_stream.WriteLine(data_point);
             }
             MessageBox.Show("Data was written to file called " + data_path + "DataFile.txt");
+            // open the saved file using the system default text editor
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = "DataFile.txt";
+            psi.UseShellExecute = true;
+            psi.Verb = "edit";
+            Process.Start(psi);
         }
 
         private void lbl_Search_dataList_Click(object sender, EventArgs e)
@@ -155,7 +163,7 @@ namespace Astronomical_Processing
                 data_fetched = true;
             }
             // display error message
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Error.");
             }
@@ -297,7 +305,6 @@ namespace Astronomical_Processing
             if (lst_astro_data.Count == 0)
             {
                 MessageBox.Show("No data to calculate. Please fetch the data first.");
-                txt_Search_dataList.Clear();
             }
             else
             {
@@ -309,6 +316,7 @@ namespace Astronomical_Processing
                 decimal midExtreme = (minNumber + maxNumber) / 2;
                 // display the result with two decimal places
                 txt_MidExtreme.Text = midExtreme.ToString("F2");
+                txt_MidExtreme.Visible = true;
             }
         }
 
@@ -318,7 +326,6 @@ namespace Astronomical_Processing
             if (lst_astro_data.Count == 0)
             {
                 MessageBox.Show("No data to calculate. Please fetch the data first.");
-                txt_Search_dataList.Clear();
             }
             else
             {
@@ -329,13 +336,16 @@ namespace Astronomical_Processing
                 // calculate the range
                 decimal list_range = maxNumber - minNumber;
                 // display the result with two decimal places
-                txt_Range.Text = list_range.ToString("F2");
+                txt_Range.Text = list_range.ToString();
+                txt_Range.Visible = true;
             }
         }
 
         private void btn_Mode_Click(object sender, EventArgs e)
         {
-
+            List<int> modes = FindModes(lst_astro_data);
+            txt_Mode.Text = string.Join(", ", modes);
+            txt_Mode.Visible = true;
         }
 
         private void btn_Average_Click(object sender, EventArgs e)
@@ -344,11 +354,86 @@ namespace Astronomical_Processing
             if (lst_astro_data.Count == 0)
             {
                 MessageBox.Show("No data to calculate. Please fetch the data first.");
-                txt_Search_dataList.Clear();
             }
             else
             {
                 txt_Average.Text = lst_astro_data.Average().ToString("F2");
+                txt_Average.Visible = true;
+            }
+        }
+        static List<int> FindModes(List<int> lst_astro_data)
+        {
+            // Dictionary to store the frequency of each number
+            Dictionary<int, int> frequency = new Dictionary<int, int>();
+
+            // Fill the frequency dictionary
+            foreach (int number in lst_astro_data)
+            {
+                if (frequency.ContainsKey(number))
+                {
+                    frequency[number]++;
+                }
+                else
+                {
+                    frequency[number] = 1;
+                }
+            }
+
+            // Find the maximum frequency
+            int maxCount = frequency.Values.Max();
+
+            // Find all numbers with the maximum frequency
+            List<int> modes = frequency.Where(kvp => kvp.Value == maxCount)
+                                        .Select(kvp => kvp.Key)
+                                        .ToList();
+
+            return modes;
+        }
+        static int SequentialSearch(List<int> list, int target)
+        {
+            // Iterate through the list to find the target
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i] == target)
+                {
+                    return i; // Return the index if the target is found
+                }
+            }
+
+            return -1; // Return -1 if the target is not found
+        }
+
+        private void btn_SequentialSearch_Click(object sender, EventArgs e)
+        {
+            // check that data has been loaded
+            if (lst_astro_data.Count == 0)
+            {
+                MessageBox.Show("No data to search. Please fetch the data first.");
+                txt_SequentialSearch.Clear();
+            }
+            else
+            {
+                List<int> numbers = lst_astro_data;
+                int target = -1;
+                if (int.TryParse(txt_SequentialSearch.Text, out target))
+                {
+                    int index = SequentialSearch(numbers, target);
+
+                    if (index != -1)
+                    {
+                        MessageBox.Show($"Target {target} found at index {index}.");
+                        txt_SequentialSearch.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Target {target} not found in the list.");
+                        txt_SequentialSearch.Clear();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please eneter an integer.");
+                }
             }
         }
     }
