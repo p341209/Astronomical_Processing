@@ -223,11 +223,19 @@ namespace Astronomical_Processing
                     lst_sorted.AddRange(lst_astro_data);
                     //call the BubbleSort function and parse the copied list to it
                     BubbleSort(lst_sorted);
+                    // clear contents of the listbox to prevent duplication
+                    listBox1.Items.Clear();
+                    // add all elements of lst_sorted to the listbox
+                    for (int y = 0; y < lst_sorted.Count; y++)
+                    {
+                        listBox1.Items.Add(lst_sorted[y]);
+                    }
                     int element_index = BinarySearch(lst_sorted, search_int);
                     // if the element is found, BinarySearch returns the index number
                     if (element_index != -1)
                     {
-                        MessageBox.Show("Found \'" + search_int + "\' at index number " + element_index + " of sorted data list.");
+                        MessageBox.Show("Found " + search_int);
+                        listBox1.SelectedIndex = element_index;
                     }
                     else // the user input an integer, but it's not found in the dataList
                     {
@@ -343,9 +351,18 @@ namespace Astronomical_Processing
 
         private void btn_Mode_Click(object sender, EventArgs e)
         {
-            List<int> modes = FindModes(lst_astro_data);
-            txt_Mode.Text = string.Join(", ", modes);
-            txt_Mode.Visible = true;
+            // check that data has been loaded
+            if (lst_astro_data.Count == 0)
+            {
+                MessageBox.Show("No data to search. Please fetch the data first.");
+                txt_Search_dataList.Clear();
+            }
+            else
+            {
+                List<int> modes = FindModes(lst_astro_data);
+                txt_Mode.Text = string.Join(", ", modes);
+                txt_Mode.Visible = true;
+            }
         }
 
         private void btn_Average_Click(object sender, EventArgs e)
@@ -391,16 +408,16 @@ namespace Astronomical_Processing
         }
         static int SequentialSearch(List<int> list, int target)
         {
-            // Iterate through the list to find the target
-            for (int i = 0; i < list.Count; i++)
-            {
-                if (list[i] == target)
+                // Iterate through the list to find the target
+                for (int i = 0; i < list.Count; i++)
                 {
-                    return i; // Return the index if the target is found
+                    if (list[i] == target)
+                    {
+                        return i; // Return the index if the target is found
+                    }
                 }
-            }
 
-            return -1; // Return -1 if the target is not found
+                return -1; // Return -1 if the target is not found
         }
 
         private void btn_SequentialSearch_Click(object sender, EventArgs e)
@@ -413,6 +430,13 @@ namespace Astronomical_Processing
             }
             else
             {
+                // clear contents of the listbox to prevent duplication
+                listBox1.Items.Clear();
+                // add all elemnts of lst_astro_data to the listbox
+                for (int y = 0; y < lst_astro_data.Count; y++)
+                {
+                    listBox1.Items.Add(lst_astro_data[y]);
+                }
                 List<int> numbers = lst_astro_data;
                 int target = -1;
                 if (int.TryParse(txt_SequentialSearch.Text, out target))
@@ -421,8 +445,9 @@ namespace Astronomical_Processing
 
                     if (index != -1)
                     {
-                        MessageBox.Show($"Target {target} found at index {index}.");
+                        MessageBox.Show($"Target {target} found.");
                         txt_SequentialSearch.Clear();
+                        listBox1.SelectedIndex = index;
                     }
                     else
                     {
@@ -432,7 +457,7 @@ namespace Astronomical_Processing
                 }
                 else
                 {
-                    MessageBox.Show("Please eneter an integer.");
+                    MessageBox.Show("Please enter an integer to search for.");
                 }
             }
         }
